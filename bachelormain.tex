@@ -58,6 +58,11 @@
   \ifnumgreater{\value{liststop}}{2}{}{}%
   \addspace\&\space}
 
+
+% Front page and colophone
+\usepackage{geometry}
+
+
 % Syntaxmarking: python
 % Defining colors
 \usepackage{color}
@@ -175,14 +180,14 @@
 \newcommand{\apj}{The Astrophysical Journal\xspace}
 
 % Mathematics macros
-\newcommand{\dx}[1]{\,\text{d}#1}
-\newcommand{\vecb}[1]{\boldsymbol{{#1}}}
-\newcommand{\teff}{T_{\text{eff}}}
-\newcommand{\logg}{\log\,g}
-\newcommand{\feh}{[\text{Fe}/\text{H}]}
-\newcommand{\angdia}{\theta_\text{LD}}
-\newcommand{\dn}{\Delta \nu}
-\newcommand{\nmax}{\nu_{\text{max}}}
+\newcommand{\dx}[1]{\ensuremath{\,\text{d}#1}}
+\newcommand{\vecb}[1]{\ensuremath{\boldsymbol{{#1}}}}
+\newcommand{\teff}{\ensuremath{T_{\text{eff}}}}
+\newcommand{\logg}{\ensuremath{\log\,g}}
+\newcommand{\feh}{\ensuremath{[\text{Fe}/\text{H}]}}
+\newcommand{\angdia}{\ensuremath{\theta_\text{LD}}}
+\newcommand{\dn}{\ensuremath{\Delta \nu}}
+\newcommand{\nmax}{\ensuremath{\nu_{\text{max}}}}
 
 \selectlanguage{danish} 
 \hyphenation{skala-relationen}
@@ -198,7 +203,7 @@
 \include{abstractandpreface} % Abstract (in english and danish), a preface and the acknowledgements
 \tableofcontents*
 \mainmatter
-\include{theoryinterferometry}
+\include{theory}
 \printbibliography
 \appendix
 \include{appendix}
