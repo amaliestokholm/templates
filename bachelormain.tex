@@ -1,0 +1,205 @@
+\documentclass[a4paper,twoside,11pt]{memoir}
+
+% This preamble is written by Amalie Stokholm with the help and inspiration from Steffen Videbæk, Mathias Rav, Rasmus Villemoes and Lars 'daleif' Madsen. 
+
+% Check input
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Fonts and microtype
+\usepackage[danish,english]{babel}
+\usepackage{csquotes}  % recommended when using babel
+\usepackage{lmodern}
+\usepackage[final]{microtype}
+
+\usepackage{url}
+\usepackage{xspace}
+
+% Graphics
+\usepackage{graphicx}
+
+% Mathematics
+\usepackage{amsmath}
+
+% SI-units
+\usepackage[detect-all]{siunitx}
+	\sisetup{separate-uncertainty=true, % uses \pm instead of parenthesis
+			per-mode=symbol}
+% https://github.com/EdwinChan/latex-hacks/blob/master/astro.sty
+\DeclareSIUnit\solarradius{\ensuremath{\mathit{R}_\odot}}
+\DeclareSIUnit\solarmass{\ensuremath{\mathit{M}_\odot}}
+
+% References
+\usepackage{varioref}
+\usepackage[colorlinks=true,
+			allcolors=black
+			]{hyperref}
+\usepackage{cleveref}
+
+% BibLaTeX, needs installation of Biber
+\usepackage[style=authoryear-comp,
+			backend=biber,
+			hyperref=true,
+			natbib=true,
+            url=false,
+            doi=false,
+            isbn=false,
+            uniquelist=false,
+            uniquename=false,
+            maxcitenames=2,mincitenames=1,
+            ]{biblatex}
+\bibliography{bachelor}
+
+% Space in bibliography
+\setlength\bibitemsep{1.5\itemsep}
+
+% Replaces 'and' with ' &' http://tex.stackexchange.com/questions/68053/use-ampersand-in-citations-and-bibliography-in-biblatex
+\renewcommand*{\finalnamedelim}{%
+  \ifnumgreater{\value{liststop}}{2}{}{}%
+  \addspace\&\space}
+
+% Syntaxmarking: python
+% Defining colors
+\usepackage{color}
+	\definecolor{deepblue}{rgb}{0,0,0.5}
+	\definecolor{deepred}{rgb}{0.6,0,0}
+	\definecolor{deepgreen}{rgb}{0,0.5,0}
+\usepackage{listings}
+% PDF accessibility support for literate listings
+\usepackage{accsupp}
+	\lstset{
+			language=Python,
+			basicstyle=\small\sffamily,
+			keywordstyle=\color{deepblue},  
+			emphstyle=\color{deepred},    
+			stringstyle=\color{deepgreen},
+			commentstyle=\color{red},        
+			showstringspaces=false,
+			columns=fullflexible,
+			keepspaces=true,
+			numbers=left,
+			numbersep=20pt,
+			numberstyle=\tiny,
+			% escapeinside={$}{$},
+			% mathescape=true,
+			literate=
+			{_}{%
+			  \makebox[0pt][l]{%
+			    \makebox[4pt][c]{%
+			      \textcolor{white}{\_}}}%
+			  \rule[-0.4pt]{4pt}{0.4pt}%
+			}1
+			{-}{%
+			  % http://tex.stackexchange.com/a/18509/76220
+			  % Use accessibility support to change what text
+			  % is copied out of the PDF: ASCII hyphen
+			  % instead of Unicode minus
+			  \BeginAccSupp{
+			    method=escape,
+			    ActualText={-}
+			  }%
+			  $-$%
+			  \EndAccSupp{}%
+			}1
+			{*}{%
+			  % http://tex.stackexchange.com/a/18509/76220
+			  % Use accessibility support to change what text
+			  % is copied out of the PDF: ASCII hyphen
+			  % instead of Unicode minus
+			  \BeginAccSupp{
+			    method=escape,
+			    ActualText={*}
+			  }%
+			  $*$%
+			  \EndAccSupp{}%
+			}1
+			{µ}{$\mu$}1
+			{É}{{\'E}}1,
+}
+% The option to attach files (code)
+\usepackage{attachfile}
+
+% Filler text
+\usepackage{lipsum}
+
+% Fix-me
+\usepackage[final]{fixme}
+	\fxsetup{layout=footnote}
+
+% Appendix i ToC
+\renewcommand\cftappendixname{\appendixname~}
+
+% Margins (with help from Steffen Videbæk)
+\setlxvchars
+\settypeblocksize{*}{1.03\lxvchars}{1.6181}
+\setulmargins{*}{*}{1.6181}
+\setlrmargins{*}{*}{1.6181}
+\checkandfixthelayout[nearest] % needed in order for memoir to compile these settings correctly.
+
+% TÅGEKAMMERET package allowing the right naming of tk
+\pagestyle{headings}
+
+% For default values, search for \makechapterstyle{default} in memoir.cls.
+% Find memoir.cls with kpsewhich memoir.cls
+\makechapterstyle{hangnumtight}{%
+  \chapterstyle{hangnum}
+  % hangnum by default has \beforechapskip=50pt 
+  \setlength{\beforechapskip}{-20pt}
+  % hangnum by default has \afterchapskip=40pt
+  \setlength{\afterchapskip}{20pt}
+}
+\chapterstyle{hangnumtight}
+
+% Macros
+\newcommand{\projecttitle}{Interferometric and Asteroseismic Analysis of the Subgiant \mystar}
+\newcommand{\projecttitledanish}{Interferometrisk og Asteroseismisk Analyse af Subkæmpestjernen \mystar}
+\author{Amalie Louise Stokholm}
+\date{\today}
+\newcommand{\hdformat}[1]{HD~\@{#1}\xspace}
+\newcommand{\mystar}{\hdformat{181096}}
+\newcommand{\figref}[1]{Fig.\@~\ref{#1}\xspace}
+\newcommand{\secref}[1]{Sec.\@~\ref{#1}\xspace}
+\newcommand{\chapref}[1]{Chap.\@~\ref{#1}\xspace}
+\newcommand{\tabref}[1]{Table~\ref{#1}\xspace}
+\renewcommand{\eqref}[1]{Eq.\@~\ref{#1}\xspace}
+\newcommand{\atlas}{\textsc{Atlas}\xspace}
+\newcommand{\phoe}{\textsc{Phoenix}\xspace}
+\newcommand{\stagger}{\textsc{Stagger}\xspace}
+\newcommand{\kepler}{\emph{Kepler}\xspace}
+\newcommand{\hipparcos}{Hipparcos\xspace}
+\newcommand{\gaia}{Gaia\xspace}
+\newcommand{\loli}{\textsc{L0L1}\xspace}
+\newcommand{\lilii}{\textsc{L1L2}\xspace}
+\newcommand{\aap}{Astronomy \& Astrophysics\xspace}
+\newcommand{\araa}{Annual Review of Astronomy and Astrophysics\xspace}
+\newcommand{\apj}{The Astrophysical Journal\xspace}
+
+% Mathematics macros
+\newcommand{\dx}[1]{\,\text{d}#1}
+\newcommand{\vecb}[1]{\boldsymbol{{#1}}}
+\newcommand{\teff}{T_{\text{eff}}}
+\newcommand{\logg}{\log\,g}
+\newcommand{\feh}{[\text{Fe}/\text{H}]}
+\newcommand{\angdia}{\theta_\text{LD}}
+\newcommand{\dn}{\Delta \nu}
+\newcommand{\nmax}{\nu_{\text{max}}}
+
+\selectlanguage{danish} 
+\hyphenation{skala-relationen}
+\selectlanguage{english}
+
+% Includeonly
+%\includeonly{frontpage}
+
+\begin{document}
+\frontmatter
+\include{frontpage} % Front page & colophone
+\pagenumbering{roman}
+\include{abstractandpreface} % Abstract (in english and danish), a preface and the acknowledgements
+\tableofcontents*
+\mainmatter
+\include{theoryinterferometry}
+\printbibliography
+\appendix
+\include{appendix}
+\end{document}
